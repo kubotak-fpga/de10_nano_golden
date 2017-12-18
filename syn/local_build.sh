@@ -87,7 +87,11 @@ else
     cp ../settings/syn_option.tcl ./ || { echo "Error!  syn_option.tcl file does not exist"; exit 1 ; }
     
     #set compile_arg
-    compile_arg="all"
+    if [ "$1" = "rebuild" -o "$1" = "" ] ; then
+	compile_arg="all"
+    else
+	compile_arg="$1"
+    fi
 
     quartus_sh --64bit -t compile_prj.tcl $compile_arg | tee build.log
 
